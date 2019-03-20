@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <header>
+      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Netflix</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+          <a class="p-2 text-dark" href="../setup/home.html">Home</a>
+          <a class="p-2 text-dark" href="../mylist/favorite/favoritelist.html">MyList</a>
+          <a class="p-2 text-dark" href="../review/review.list.html">Review</a>
+          <a class="p-2 text-dark" href="../Mypage/mypage.html">MyPage</a>
+
+          <form action="/search">
+            <input class="serchbox" placeholder="タイトル、人名、ジャンル" title="serchbox"  autocomplete="off" maxlength="2048" size="25" type="text">
+            <button class="ab_button" aria-label="検索ボタン" name="btnGNS" type="submit">
+              <span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAg0lEQVR4AWLwySwcEAxotw4wAAiBKIBeZY6wR5mbzg3XztLAZ5f4ffBjUKXXqJJhw4b1cJfsqI57YtXzGDzgTxQd7pKQYaz2gAUlG65Bt/oJ8GQUH/0xYzjwxqR0WJ+xfo/Fp5pwjxHXvFzQdsne6hdDnA9zcISpeElgwEsG+wdi2PADY3DfLvm/H5cAAAAASUVORK5CYII=">
+              </span>
+            </button>
+          </form>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h2>レビューを書く</h2>
+  </div>
+
+  <div class="row">
+        <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Login</h4>
+      <form class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Username</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <small id="emailHelp" class="form-text text-muted">Please check correcting ID and Password.</small>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+
+        </div>
+
+
+      <button class="btn btn-primary btn-lg btn-block" type="submit">投稿する</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2017-2018 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+        <script src="form-validation.js"></script></body>
+</html>

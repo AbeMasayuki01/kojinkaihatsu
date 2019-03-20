@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <title>userList</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+  <style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+      <h5 class="my-0 mr-md-auto font-weight-normal">Netflix</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="../setup/home.html">Home</a>
+        <a class="p-2 text-dark" href="../mylist/favorite/favoritelist.html">MyList</a>
+        <a class="p-2 text-dark" href="../review/review.list.html">Review</a>
+        <a class="p-2 text-dark" href="../Mypage/mypage.html">MyPage</a>
+
+        <form action="/search">
+          <input class="serchbox" placeholder="タイトル、人名、ジャンル" title="serchbox"  autocomplete="off" maxlength="2048" size="25" type="text">
+          <button class="ab_button" aria-label="検索ボタン" name="btnGNS" type="submit">
+            <span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAg0lEQVR4AWLwySwcEAxotw4wAAiBKIBeZY6wR5mbzg3XztLAZ5f4ffBjUKXXqJJhw4b1cJfsqI57YtXzGDzgTxQd7pKQYaz2gAUlG65Bt/oJ8GQUH/0xYzjwxqR0WJ+xfo/Fp5pwjxHXvFzQdsne6hdDnA9zcISpeElgwEsG+wdi2PADY3DfLvm/H5cAAAAASUVORK5CYII=">
+            </span>
+          </button>
+        </form>
+      </nav>
+    </div>
+  </header>
+
+
+  <h1 class="allusers">ユーザ一覧</h1>
+  <table border="1">
+    <tr>
+      <th>LoginID</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th></th>
+    </tr>
+    <tbody>
+      <!-- リクエストスコープのuserlistをuserとして扱う。userlistの中はuserbeansのフィールドが入っている。
+      ＜user.longi_id＞はuserList（user）の中身であるbeansのlogin_idをEL式で表している。 -->
+      <c:forEach var="user" items="${userList}" >
+      <tr>
+        <td><input type="text" name="loginid" value="abe"></td>
+        <td><input type="text" name="login_id" value=""></td>
+        <td><input type="text" name="login_id" value=""></td>
+        <td><input type="text" name="login_id" value=""></td>
+        <td><input type="text" name="login_id" value=""></td>
+        <td><input type="text" name="login_id" value=""></td>
+        <td>
+          <c:if test="${userInfo.login_id=='admin'}">
+        </div>
+        <div class="btn-group">
+          <a href="#UserDetailsServlet?id=${user.id}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">更新</a>
+          <a href="#UserDetailsServlet?id=${user.id}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">削除</a>
+        </div>
+
+      </c:if>
+    </td>
+  </tr>
+</c:forEach>
+</tbody>
+</table>
+</body>
+</html>
