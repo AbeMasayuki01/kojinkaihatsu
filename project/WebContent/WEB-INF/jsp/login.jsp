@@ -23,11 +23,11 @@
 		<div class="row">
 			<div class="col-md-8 order-md-1">
 				<h4 class="mb-3">Login</h4>
-				<form>
+				<form class="form-signin" action="Login" method="post">
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="firstName">Username</label> <input type="text"
-								class="form-control" id="firstName" placeholder="" value=""
+							<label for="login_id">login_id</label> <input type="text"
+								class="form-control" name="login_id" placeholder="" value=""
 								required> <small id="emailHelp"
 								class="form-text text-muted">Please check correcting ID
 								and Password.</small>
@@ -39,15 +39,16 @@
 
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="country">Password</label> <input type="password"
-								class="form-control" id="exampleInputPassword1"
-								placeholder="Password">
+							<label for="Password">Password</label> <input type="password"
+								class="form-control" name="Password" placeholder="Password">
 							<div class="invalid-feedback"></div>
 						</div>
 					</div>
-
 					<button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
 				</form>
+				<div style="margin: 100px;">
+          <a class="p-2 text-dark" href="Regist">New Assign</a>
+				</div>
 			</div>
 		</div>
 

@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.UserDataBeans;
-import dao.UserDAO;
+import beans.ItemDataBeans;
+import dao.ItemDAO;
 
 /**
- * Servlet implementation class Regist
+ * Servlet implementation class ItemRegist
  */
-@WebServlet("/Regist")
-public class Regist extends HttpServlet {
+@WebServlet("/ItemRegist")
+public class ItemRegist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Regist() {
+    public ItemRegist() {
         super();
     }
 
@@ -31,7 +31,7 @@ public class Regist extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemRegist.jsp");
         dispatcher.forward(request, response);
 	}
 
@@ -43,23 +43,20 @@ public class Regist extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		try {
-			String inputUserName = request.getParameter("user_name");
-			String inputUserAddress = request.getParameter("user_address");
-			String inputUserMail = request.getParameter("user_mail");
-			String inputLoginId = request.getParameter("login_id");
-			String inputPassword = request.getParameter("password");
-			String inputConfirmPassword = request.getParameter("confirm_password");
+			String inputItemName = request.getParameter("item_name");
+			String inputItemDetail = request.getParameter("item_detail");
+			int inputItemPrice = Integer.parseInt(request.getParameter("item_price"));
+			String inputFileName = request.getParameter("item_filename");
 
-			UserDataBeans udb = new UserDataBeans();
-			udb.setName(inputUserName);
-			udb.setAddress(inputUserAddress);
-			udb.setMail(inputUserMail);
-			udb.setLoginId(inputLoginId);
-			udb.setPassword(inputPassword);
+			ItemDataBeans udb = new ItemDataBeans();
+			udb.setName(inputItemName);
+			udb.setDetail(inputItemDetail);
+			udb.setPrice(inputItemPrice);
+			udb.setFileName(inputFileName);
 
 			String validationMessage = "";
 
-			UserDAO.insertUser(udb);
+			ItemDAO.insertItem(udb);
 
 //			// 入力されているパスワードが確認用と等しいか
 //			if (!inputPassword.equals(inputConfirmPassword)) {
@@ -78,7 +75,7 @@ public class Regist extends HttpServlet {
 //			// バリデーションエラーメッセージがないなら確認画面へ
 //			if (validationMessage.length() == 0) {
 				request.setAttribute("udb", udb);
-				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/ItemRegist.jsp").forward(request, response);
 //			} else {
 //				session.setAttribute("udb", udb);
 //				session.setAttribute("validationMessage", validationMessage);
@@ -88,7 +85,7 @@ public class Regist extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());
-			response.sendRedirect("Regist");
+			response.sendRedirect("ItemRegist");
 		}
 	}
 }

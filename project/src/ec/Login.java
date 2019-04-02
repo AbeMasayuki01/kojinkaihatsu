@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.UserDataBeans;
+import dao.UserDAO;
+
 /**
  * Servlet implementation class Login
  */
@@ -17,36 +20,58 @@ import javax.servlet.http.HttpSession;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Login() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
-		//ログイン失敗時に使用するため
-		String inputLoginId =session.getAttribute("loginId")!=null?(String) EcHelper.cutSessionAttribute(session,"loginId"):"";
-		String loginErrorMessage = (String)EcHelper.cutSessionAttribute(session, "loginErrorMessage");
-
-		request.setAttribute("inputLoginId", inputLoginId);
-		request.setAttribute("loginErrorMessage", loginErrorMessage);
-
+		if (session.getAttribute("userInfo") != null) {
+			response.sendRedirect("Home");
+			return;
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-        dispatcher.forward(request, response);
+		dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
+
+		String loginId = request.getParameter("login_id");
+		String password = request.getParameter("Password");
+
+		UserDAO userdao = new UserDAO();
+		UserDataBeans userbeans = userdao.getUserId(loginId, password);
+
+		if (userbeans == null) {
+			request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+
+	        dispatcher.forward(request, response);
+	        return;
+		}
+
+
+		session.setAttribute("userInfo", userbeans);
+
+		response.sendRedirect("Home");
+
 	}
+
+
 
 }

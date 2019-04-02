@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <head>
@@ -9,14 +8,11 @@
 <jsp:include page="/baselayout/head.html" />
 </head>
 <body class="text-center">
-    <jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
 	<div class="container">
 		<div class="py-5 text-center">
 
-			<img class="d-block mx-auto mb-4"
-				src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72"
-				height="72">
 			<h2>Sign Up Form</h2>
 			<p class="lead">Below is an example form built entirely with
 				Bootstrap’s form controls. Each required form group has a validation
@@ -27,31 +23,18 @@
 		<div class="row">
 			<div class="col-md-8 order-md-1">
 				<h4 class="mb-3">新規登録</h4>
-				<form class="needs-validation" novalidate>
+				<form action="Regist" method="POST">
 					<div class="mb-3">
 						<label for="name">Name</label> <input type="text"
-							class="form-control" id="name" placeholder="your name" value=""
-							required>
+							class="form-control" name="user_name" placeholder="your name"
+							value="" required>
 						<div class="invalid-feedback">Valid first name is required.
 						</div>
 					</div>
 
 					<div class="mb-3">
-						<label for="username">Username</label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text">@</span>
-							</div>
-							<input type="text" class="form-control" id="username"
-								placeholder="Username" required>
-							<div class="invalid-feedback" style="width: 100%;">Your
-								username is required.</div>
-						</div>
-					</div>
-
-					<div class="mb-3">
-						<label for="mail">Email <span class="text-muted">(Optional)</span></label>
-						<input type="email" class="form-control" id="mail"
+						<label for="mail">Email</label>
+						<input type="email" class="form-control" name="user_mail"
 							placeholder="you@example.com">
 						<div class="invalid-feedback">Please enter a valid email
 							address for shipping updates.</div>
@@ -59,55 +42,47 @@
 
 					<div class="mb-3">
 						<label for="address">Address</label> <input type="text"
-							class="form-control" id="address" placeholder="1234 Main St"
+							class="form-control" name="user_address" placeholder="1234 Main St"
 							required>
 						<div class="invalid-feedback">Please enter your shipping
 							address.</div>
 					</div>
-
-
+					<div class="mb-3">
+						<label for="username">Login ID</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+							</div>
+							<input type="text" class="form-control" name="login_id"
+								placeholder="LoginID" required>
+							<div class="invalid-feedback" style="width: 100%;">Your
+								loginID is required.</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-md-5 mb-3">
-							<label for="country">Password</label> <input type="password"
-								class="form-control" id="exampleInputPassword1"
+							<label for="country">Login Password</label><input type="password"
+								class="form-control" name="password"
 								placeholder="Password">
 							<div class="invalid-feedback"></div>
 						</div>
-						<div class="col-md-4 mb-3">
+						<div class="col-md-5 mb-3">
 							<label for="state">Password(confirm)</label> <input
-								type="password" class="form-control" id="exampleInputPassword1"
+								type="password" class="form-control" name="confirm_password"
 								placeholder="Password(confirm)">
 
 							<hr class="mb-3">
+						</div>
+					</div>
 
 
-
-							<button class="btn btn-primary btn-lg btn-block" type="submit">Sign
-								up</button>
+					<button class="btn btn-primary btn-lg btn-block" type="submit">Sign
+						up</button>
 				</form>
 			</div>
 		</div>
-
-		<footer class="my-5 pt-5 text-muted text-center text-small">
-			<p class="mb-1">&copy; 2017-2018 Company Name</p>
-			<ul class="list-inline">
-				<li class="list-inline-item"><a href="#">Privacy</a></li>
-				<li class="list-inline-item"><a href="#">Terms</a></li>
-				<li class="list-inline-item"><a href="#">Support</a></li>
-			</ul>
-		</footer>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
-	<script src="/docs/4.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
-		crossorigin="anonymous"></script>
-	<script src="form-validation.js"></script>
+
+
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
@@ -9,7 +9,7 @@
 <jsp:include page="/baselayout/head.html" />
 </head>
 <body class="text-center">
-    <jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
 
 	<main role="main" class="inner cover">
@@ -40,7 +40,11 @@
 								content is a little bit longer.</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">購入</button>
+									<form action="Buy" method="POST">
+										<input type="hidden" name="item_id" value="${item.id}">
+										<button type="button" class="btn btn-sm btn-outline-secondary">購入</button>
+									</form>
+
 									<button type="button" class="btn btn-sm btn-outline-secondary">レビュー</button>
 								</div>
 							</div>

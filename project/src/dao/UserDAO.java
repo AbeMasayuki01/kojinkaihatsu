@@ -2,8 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import base.DBManager;
 import beans.UserDataBeans;
 
 /**
@@ -25,6 +27,26 @@ public class UserDAO {
 	public static void insertUser(UserDataBeans udb) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("INSERT INTO t_user(name,address,mail,login_id,login_password) VALUES(?,?,?,?,?)");
+			st.setString(1, udb.getName());
+			st.setString(2, udb.getAddress());
+			st.setString(3, udb.getMail());
+			st.setString(4, udb.getLoginId());
+			st.setString(5, udb.getPassword());
+			st.executeUpdate();
+
+			System.out.println("inserting user has been completed");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
 	}
 
 	/**
@@ -38,9 +60,42 @@ public class UserDAO {
 	 * @throws SQLException
 	 *             呼び出し元にスロー
 	 */
-	public static int getUserId(String loginId, String password) throws SQLException {
-		Connection con = null;
-		PreparedStatement st = null;
+	public UserDataBeans getUserId(String loginId, String password) {
+		Connection conn = null;
+
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "SELECT * FROM t_user WHERE login_id = ? and login_password = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginId);
+			pStmt.setString(2, password);
+			ResultSet rs = pStmt.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+
+			String loginIdData = rs.getString("login_id");
+			String nameData = rs.getString("name");
+//以下、ログインセッションの時に保持しているデータ
+			return new UserDataBeans(loginIdData, nameData);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
 	}
 
 	/**
@@ -56,7 +111,7 @@ public class UserDAO {
 		UserDataBeans udb = new UserDataBeans();
 		Connection con = null;
 		PreparedStatement st = null;
-			}
+	}
 
 	/**
 	 * ユーザー情報の更新処理を行う。
@@ -91,8 +146,5 @@ public class UserDAO {
 		PreparedStatement st = null;
 
 	}
-
-
-
 
 }
