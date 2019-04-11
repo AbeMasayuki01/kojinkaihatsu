@@ -48,8 +48,9 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
+
+		HttpSession session = request.getSession();
 
 		String loginId = request.getParameter("login_id");
 		String password = request.getParameter("Password");

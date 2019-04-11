@@ -77,10 +77,11 @@ public class UserDAO {
 				return null;
 			}
 
+			int id = rs.getInt("id");
 			String loginIdData = rs.getString("login_id");
 			String nameData = rs.getString("name");
 //以下、ログインセッションの時に保持しているデータ
-			return new UserDataBeans(loginIdData, nameData);
+			return new UserDataBeans(id, loginIdData, nameData);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

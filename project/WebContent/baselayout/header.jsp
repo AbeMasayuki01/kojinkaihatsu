@@ -14,14 +14,12 @@
           <a class="p-2 text-dark" href="favoritelist">MyList</a>
           <a class="p-2 text-dark" href="Reviewlist">Review</a>
           <a class="p-2 text-dark" href="Mypage">MyPage</a>
+                <div class="input-field col s8 offset-s2">
+                    <form action="Serchresult">
+                        <i class="material-icons prefix">search</i> <input type="text" name="search_word">
+                    </form>
+                </div>
 
-          <form action="/search">
-            <input class="serchbox" placeholder="タイトル、人名、ジャンル" title="serchbox"  autocomplete="off" maxlength="2048" size="25" type="text">
-            <button class="ab_button" aria-label="検索ボタン" name="btnGNS" type="submit">
-              <span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAg0lEQVR4AWLwySwcEAxotw4wAAiBKIBeZY6wR5mbzg3XztLAZ5f4ffBjUKXXqJJhw4b1cJfsqI57YtXzGDzgTxQd7pKQYaz2gAUlG65Bt/oJ8GQUH/0xYzjwxqR0WJ+xfo/Fp5pwjxHXvFzQdsne6hdDnA9zcISpeElgwEsG+wdi2PADY3DfLvm/H5cAAAAASUVORK5CYII=">
-              </span>
-            </button>
-          </form>
 
         </nav>
       </div>
