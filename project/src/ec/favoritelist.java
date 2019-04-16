@@ -1,6 +1,7 @@
 package ec;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.FavoriteDateBeans;
+import beans.ItemDataBeans;
 import beans.UserDataBeans;
 import dao.FavariteDAO;
+import dao.ItemDAO;
 
 /**
  * Servlet implementation class favoritelist
@@ -33,8 +36,24 @@ public class favoritelist extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/favoritelist.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		UserDataBeans userInfo = (UserDataBeans) session.getAttribute("userInfo");
+
+		try {
+			int userId = userInfo.getId();
+
+			ArrayList<ItemDataBeans> favoriteitemList = ItemDAO.getfavoriteItem(userId);
+			request.setAttribute("favoriteitemList", favoriteitemList);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/favoritelist.jsp");
+			dispatcher.forward(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
+
+		}
 	}
 
 	/**
@@ -45,16 +64,22 @@ public class favoritelist extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		UserDataBeans userInfo = (UserDataBeans) session.getAttribute("userInfo");
+		String searchword = request.getParameter("search_word");
+
 
 		try {
 			int userId = userInfo.getId();
 			int itemId = Integer.parseInt(request.getParameter("item_id"));
 
 			FavoriteDateBeans fdb = new FavoriteDateBeans();
-			fdb.setItemid(itemId);
 			fdb.setUserid(userId);
+			fdb.setItemid(itemId);
 
 			FavariteDAO.insertfavoriteItemByitemId(fdb);
+			response.sendRedirect("Serchresult?search_word="+searchword);
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

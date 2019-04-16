@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
@@ -9,7 +9,7 @@
 <jsp:include page="/baselayout/head.html" />
 </head>
 <body class="text-center">
-    <jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 	<main role="main">
 	<body class="bg-light">
 		<div class="container">
@@ -77,84 +77,29 @@
 						<h2>購入履歴</h2>
 					</div>
 					<div class="row">
-						<div class="col-md-4 order-md-1">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body">
-									<p class="card-text">title</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">詳細</button>
+						<c:forEach var="historyitem" items="${historyitemList}">
+
+							<div class="col-md-4 order-md-1">
+								<div class="card mb-4 shadow-sm">
+									<div class="card-body">
+										<title>${historyitem.name}</title>
+										<rect fill="#55595c" width="100%" height="100%" />
+										<img src="img/${historyitem.fileName}">
+										<div class="card-body">
+											<p class="card-text">${historyitem.name}</p>
+											<p class="card-text">${historyitem.detail}</p>
+											<div
+												class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="submit"
+														class="btn btn-sm btn-outline-secondary">レビュー</button>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body">
-									<p class="card-text">title</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">詳細</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body">
-									<p class="card-text">title</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">詳細</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body">
-									<p class="card-text">title</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">詳細</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body">
-									<p class="card-text">title</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">詳細</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body">
-									<p class="card-text">title</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">詳細</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</body>

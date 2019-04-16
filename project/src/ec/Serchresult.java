@@ -62,6 +62,8 @@ public class Serchresult extends HttpServlet {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("itemList", searchResultItemList);
 
+			request.setAttribute("search_word", searchWord);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/serchresult.jsp");
 			dispatcher.forward(request, response);
 

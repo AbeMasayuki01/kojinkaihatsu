@@ -15,13 +15,14 @@ public class FavariteDAO {
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO t_favorite(id,user_id,item_id) VALUES(?,?,?)");
-			st.setInt(1, fdb.getId());
-			st.setInt(2, fdb.getUserid());
-			st.setInt(3, fdb.getItemid());
+			st = con.prepareStatement("INSERT INTO t_favorite(user_id,item_id) VALUES(?,?)");
+			st.setInt(1, fdb.getUserid());
+			st.setInt(2, fdb.getItemid());
 			st.executeUpdate();
 
-			System.out.println("inserting user has been completed");
+			System.out.println("inserting favoriteitem has been completed");
+
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

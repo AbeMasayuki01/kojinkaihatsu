@@ -50,6 +50,8 @@ public class Buy extends HttpServlet {
 		try {
 			int userId = userInfo.getId();
 			int itemId = Integer.parseInt(request.getParameter("item_id"));
+			String searchword = request.getParameter("search_word");
+
 
 			int itemPrice = ItemDAO.getItemPriceByitemId(itemId);
 			BuyDataBeans bdb = new BuyDataBeans();
@@ -68,13 +70,14 @@ public class Buy extends HttpServlet {
 
 			BuyDetailDAO.insertBuyDetail(bddb);
 
-
 			// 成功あらーとをリクエストに格納
 
+			response.sendRedirect("Serchresult?search_word="+searchword);
 
 
 			//ユーザーID（⇨セッションから）とアイテムID（⇨クリックしたもの、てことはformか？）からbuytableにインサートして終わり、
 			//変数をきめるまでの仕事
+
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/serchresult.jsp");
 			dispatcher.forward(request, response);

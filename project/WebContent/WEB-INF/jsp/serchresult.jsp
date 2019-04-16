@@ -44,20 +44,26 @@
 									<div class="btn-group">
 										<form action="favoritelist" method="POST">
 											<input type="hidden" name="item_id" value="${item.id}">
-											<button type="button"
+											<input type="hidden" name="search_word"
+												value="${search_word}">
+
+											<button type="submit"
 												class="btn btn-sm btn-outline-secondary"
 												style="padding-right: 13px;">❤️</button>
 										</form>
 
 										<form action="Buy" method="POST">
 											<input type="hidden" name="item_id" value="${item.id}">
+											<input type="hidden" name="search_word"
+												value="${search_word}">
+
 											<button type="submit"
 												class="btn btn-sm btn-outline-secondary" name="action">購入</button>
 										</form>
 
 										<form
 											action="Filmdetail?item_id=${item.id}&page_num=${pageNum}">
-											<button type="button"
+											<button type="submit"
 												class="btn btn-sm btn-outline-secondary">詳細</button>
 										</form>
 

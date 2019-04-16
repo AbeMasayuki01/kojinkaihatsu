@@ -108,11 +108,6 @@ public class UserDAO {
 	 * @throws SQLException
 	 *             呼び出し元にcatchさせるためスロー
 	 */
-	public static UserDataBeans getUserDataBeansByUserId(int userId) throws SQLException {
-		UserDataBeans udb = new UserDataBeans();
-		Connection con = null;
-		PreparedStatement st = null;
-	}
 
 	/**
 	 * ユーザー情報の更新処理を行う。
@@ -140,12 +135,5 @@ public class UserDAO {
 	 * @return bool 重複している
 	 * @throws SQLException
 	 */
-	public static boolean isOverlapLoginId(String loginId, int userId) throws SQLException {
-		// 重複しているかどうか表す変数
-		boolean isOverlap = false;
-		Connection con = null;
-		PreparedStatement st = null;
-
-	}
 
 }
