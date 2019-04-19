@@ -62,6 +62,7 @@ public class UserDAO {
 	 */
 	public UserDataBeans getUserId(String loginId, String password) {
 		Connection conn = null;
+		UserDataBeans udb = new UserDataBeans();
 
 		try {
 			conn = DBManager.getConnection();
@@ -73,15 +74,15 @@ public class UserDAO {
 			pStmt.setString(2, password);
 			ResultSet rs = pStmt.executeQuery();
 
-			if (!rs.next()) {
-				return null;
+			if (rs.next()) {
+				udb.setId(rs.getInt("id"));
+				udb.setName(rs.getString("name"));
+				udb.setAddress(rs.getString("address"));
+				udb.setMail(rs.getString("mail"));
+				udb.setLoginId(rs.getString("login_id"));
 			}
-
-			int id = rs.getInt("id");
-			String loginIdData = rs.getString("login_id");
-			String nameData = rs.getString("name");
 //以下、ログインセッションの時に保持しているデータ
-			return new UserDataBeans(id, loginIdData, nameData);
+			return udb;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,6 +110,40 @@ public class UserDAO {
 	 *             呼び出し元にcatchさせるためスロー
 	 */
 
+	public static UserDataBeans getUserDataBeansByUserId(int userId) throws SQLException {
+		UserDataBeans udb = new UserDataBeans();
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("SELECT id,name, address, mail, login_id, FROM t_user WHERE id = ?");
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				udb.setId(rs.getInt("id"));
+				udb.setName(rs.getString("name"));
+				udb.setLoginId(rs.getString("address"));
+				udb.setMail(rs.getString("mail"));
+				udb.setAddress(rs.getString("login_id"));
+			}
+
+			st.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
+		System.out.println("searching UserDataBeans by userId has been completed");
+		return udb;
+
+	}
+
+
 	/**
 	 * ユーザー情報の更新処理を行う。
 	 *
@@ -123,17 +158,75 @@ public class UserDAO {
 		Connection con = null;
 		PreparedStatement st = null;
 
+		try {
+
+			con = DBManager.getConnection();
+			st = con.prepareStatement("UPDATE t_user SET name=?, login_id=?, mail=?, address=? WHERE id=?;");
+			st.setString(1, udb.getName());
+			st.setString(2, udb.getLoginId());
+			st.setString(3, udb.getMail());
+			st.setString(4, udb.getAddress());
+			st.setInt(5, udb.getId());
+			st.executeUpdate();
+			System.out.println("update has been completed");
+
+			st = con.prepareStatement("SELECT name, login_id, mail, address FROM t_user WHERE id=" + udb.getId());
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				updatedUdb.setName(rs.getString("name"));
+				updatedUdb.setLoginId(rs.getString("login_id"));
+				updatedUdb.setMail(rs.getString("mail"));
+				updatedUdb.setAddress(rs.getString("address"));
+
+			}
+
+			st.close();
+			System.out.println("searching updated-UserDataBeans has been completed");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
+
 	}
 
-	/**
-	 * loginIdの重複チェック
-	 *
-	 * @param loginId
-	 *            check対象のログインID
-	 * @param userId
-	 *            check対象から除外するuserID
-	 * @return bool 重複している
-	 * @throws SQLException
-	 */
+	public static boolean isOverlapLoginId(String loginId, int userId) throws SQLException {
+		// 重複しているかどうか表す変数
+		boolean isOverlap = false;
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = DBManager.getConnection();
+			// 入力されたlogin_idが存在するか調べる
+			st = con.prepareStatement("SELECT login_id FROM t_user WHERE login_id = ? AND id != ?");
+			st.setString(1, loginId);
+			st.setInt(2, userId);
+			ResultSet rs = st.executeQuery();
+
+			System.out.println("searching loginId by inputLoginId has been completed");
+
+			if (rs.next()) {
+				isOverlap = true;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
+		System.out.println("overlap check has been completed");
+		return isOverlap;
+	}
 
 }

@@ -14,39 +14,37 @@
 	<body class="bg-light">
 		<div class="container">
 			<div class="py-5 text-center">
+                <div class="container">
+                    <c:if test="${validationMessage != null}">
+                        <div class="red-text center-align">${validationMessage}</div>
+                    </c:if>
+                    <c:if test="${successMsg != null}">
+                        <div class="blue-text center-align">${successMsg}</div>
+                    </c:if>
+                </div>
+
+
 				<h2>You're Profile</h2>
 			</div>
 
 			<div class="row">
-				<div class="col-md-8 order-md-1">
+				<div class="col-md-12 order-md-1">
 					<h4 class="mb-3">プロフィール</h4>
-					<form class="needs-validation" novalidate>
-						<div class="row">
-							<div class="col-md-6 mb-3">
-								<label for="firstName">First name</label> <input type="text"
-									class="form-control" id="firstName" placeholder="" value=""
-									required>
-								<div class="invalid-feedback">Valid first name is
-									required.</div>
-							</div>
-							<div class="col-md-6 mb-3">
-								<label for="lastName">Last name</label> <input type="text"
-									class="form-control" id="lastName" placeholder="" value=""
-									required>
-								<div class="invalid-feedback">Valid last name is required.
-								</div>
-							</div>
-						</div>
-
-
+					<form action="UserDataUpdate" method="POST">
 						<div class="mb-3">
-							<label for="username">Username</label>
+							<label for="Name">Name</label> <input type="text"
+								class="form-control" name="name" value="${userInfo.name}"
+								required>
+							<div class="invalid-feedback">Valid name is required.</div>
+						</div>
+						<div class="mb-3">
+							<label for="username">Username（LoginID）</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text">@</span>
 								</div>
-								<input type="text" class="form-control" id="username"
-									placeholder="Username" required>
+								<input type="text" class="form-control" name="login_id"
+									value="${userInfo.loginId}" required>
 								<div class="invalid-feedback" style="width: 100%;">Your
 									username is required.</div>
 							</div>
@@ -54,21 +52,29 @@
 
 						<div class="mb-3">
 							<label for="email">Email <span class="text-muted">(Optional)</span></label>
-							<input type="email" class="form-control" id="email"
-								placeholder="you@example.com">
+							<input type="email" class="form-control" name="mail"
+								value="${userInfo.mail}">
 							<div class="invalid-feedback">Please enter a valid email
 								address for shipping updates.</div>
 						</div>
 
 						<div class="mb-3">
 							<label for="address">Address</label> <input type="text"
-								class="form-control" id="address" placeholder="1234 Main St"
+								class="form-control" name="address" value="${userInfo.address}"
 								required>
 							<div class="invalid-feedback">Please enter your shipping
 								address.</div>
 						</div>
+						<div class="row">
+							<div class="col s12">
+								<button class="btn btn-sm btn-outline-secondary" type="submit"
+									name="action">更新</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
+
 
 			<main role="main">
 			<body class="bg-light">

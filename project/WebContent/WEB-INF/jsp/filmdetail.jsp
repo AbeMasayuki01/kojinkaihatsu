@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
@@ -9,7 +9,7 @@
 <jsp:include page="/baselayout/head.html" />
 </head>
 <body class="text-center">
-    <jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 	<main role="main">
 
 	<section class="text-center">
@@ -26,21 +26,14 @@
 					<div
 						class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 						<div class="col p-4 d-flex flex-column position-static">
-							<h3 class="mb-0">Film title</h3>
-							<div class="mb-1 text-muted">監督名</div>
-							<p class="card-text mb-auto">This is a wider card with
-								supporting text below as a natural lead-in to additional
-								content.</p>
+							<h3 class="mb-0">${itemdetail.name}</h3>
+							<div class="mb-1 text-muted">${itemdetail.name}</div>
+							<p class="card-text mb-auto">${itemdetail.detail}</p>
 							<a href="#" class="stretched-link">購入する</a>
 						</div>
 						<div class="col-auto d-none d-lg-block">
-							<svg class="bd-placeholder-img" width="500" height="400"
-								xmlns="http://www.w3.org/2000/svg"
-								preserveAspectRatio="xMidYMid slice" focusable="false"
-								role="img" aria-label="Placeholder: Thumbnail">
-								<title>Placeholder</title><rect width="100%" height="100%"
-									fill="#55595c"></rect>
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+							<img src="img/${itemdetail.fileName}" width="500" height="400">
+
 						</div>
 					</div>
 				</div>

@@ -14,6 +14,8 @@
           <a class="p-2 text-dark" href="favoritelist">MyList</a>
           <a class="p-2 text-dark" href="Reviewlist">Review</a>
           <a class="p-2 text-dark" href="Mypage">MyPage</a>
+          <a class="p-2 text-dark" href="Logout">Logout</a>
+
                 <div class="input-field col s8 offset-s2">
                     <form action="Serchresult">
                         <i class="material-icons prefix">search</i> <input type="text" name="search_word">

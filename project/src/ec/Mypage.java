@@ -36,6 +36,8 @@ public class Mypage extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserDataBeans userInfo = (UserDataBeans)session.getAttribute("userInfo");
 		ArrayList<ItemDataBeans> historyitemList;
+		int userId = userInfo.getId();
+
 		try {
 			historyitemList = ItemDAO.gethistroyItem(userInfo.getId());
 			request.setAttribute("historyitemList", historyitemList);
@@ -46,6 +48,16 @@ public class Mypage extends HttpServlet {
 			session.setAttribute("errorMessage", e.toString());
 			response.sendRedirect("Error");
 		}
+
+		String validationMessage = (String)session.getAttribute("validationMessage");
+		request.setAttribute("validationMessage", validationMessage);
+
+		String successMsg = (String)session.getAttribute("successMsg");
+		request.setAttribute("successMsg", successMsg);
+
+
+		session.removeAttribute("validationMessage");
+		session.removeAttribute("successMsg");
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
         dispatcher.forward(request, response);

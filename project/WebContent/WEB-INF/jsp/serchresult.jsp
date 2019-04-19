@@ -62,7 +62,8 @@
 										</form>
 
 										<form
-											action="Filmdetail?item_id=${item.id}&page_num=${pageNum}">
+											action="Filmdetail" method="POST">
+											<input type="hidden" name="item_id" value="${item.id}">
 											<button type="submit"
 												class="btn btn-sm btn-outline-secondary">詳細</button>
 										</form>
