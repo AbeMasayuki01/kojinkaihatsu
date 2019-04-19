@@ -2,7 +2,6 @@ package ec;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,11 +48,12 @@ public class Buy extends HttpServlet {
 
 		try {
 			int userId = userInfo.getId();
-			int itemId = Integer.parseInt(request.getParameter("item_id"));
+			String itemId = request.getParameter("item_id");
+			int itemID = Integer.parseInt(itemId);
 			String searchword = request.getParameter("search_word");
 
 
-			int itemPrice = ItemDAO.getItemPriceByitemId(itemId);
+			int itemPrice = ItemDAO.getItemPriceByitemId(itemID);
 			BuyDataBeans bdb = new BuyDataBeans();
 			bdb.setUserId(userId);
 			bdb.setTotalPrice(itemPrice);
@@ -66,21 +66,18 @@ public class Buy extends HttpServlet {
 			// 購入詳細テーブルに購入情報を登録(buyId、itemId)
 			BuyDetailDataBeans bddb = new BuyDetailDataBeans();
 			bddb.setBuyId(buyId);
-			bddb.setItemId(itemId);
+			bddb.setItemId(itemID);
 
 			BuyDetailDAO.insertBuyDetail(bddb);
 
 			// 成功あらーとをリクエストに格納
 
-			response.sendRedirect("Serchresult?search_word="+searchword);
-
-
+//			response.sendRedirect("Serchresult?search_word="+searchword);
+			response.sendRedirect("Mypage#histroy");
 			//ユーザーID（⇨セッションから）とアイテムID（⇨クリックしたもの、てことはformか？）からbuytableにインサートして終わり、
 			//変数をきめるまでの仕事
 
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/serchresult.jsp");
-			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

@@ -68,7 +68,9 @@ public class Login extends HttpServlet {
 
 
 		session.setAttribute("userInfo", userbeans);
-
+		if (userbeans != null) {
+			session.setAttribute("isLogin", true);
+		}
 		response.sendRedirect("Home");
 
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import base.DBManager;
 import beans.UserDataBeans;
@@ -24,19 +25,26 @@ public class UserDAO {
 	 * @throws SQLException
 	 *             呼び出し元にcatchさせるためにスロー
 	 */
-	public static void insertUser(UserDataBeans udb) throws SQLException {
+	public static int insertUser(UserDataBeans udb) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
+		int autoIncKey = -1;
 
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO t_user(name,address,mail,login_id,login_password) VALUES(?,?,?,?,?)");
+			st = con.prepareStatement("INSERT INTO t_user(name,address,mail,login_id,login_password) VALUES(?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, udb.getName());
 			st.setString(2, udb.getAddress());
 			st.setString(3, udb.getMail());
 			st.setString(4, udb.getLoginId());
 			st.setString(5, udb.getPassword());
 			st.executeUpdate();
+
+			ResultSet rs = st.getGeneratedKeys();
+			if (rs.next()) {
+				autoIncKey = rs.getInt(1);
+			}
 
 			System.out.println("inserting user has been completed");
 		} catch (SQLException e) {
@@ -47,6 +55,7 @@ public class UserDAO {
 				con.close();
 			}
 		}
+		return autoIncKey;
 	}
 
 	/**

@@ -204,7 +204,7 @@ public class ItemDAO {
 
 			ResultSet rs = st.executeQuery();
 			if (!rs.next()) {
-				// 商品価格が取得できなかった場合
+				// 商品価格が取得できなかった場合 !で改行してもnullだった場合はitemPriceをreturnする。
 				return itemPrice;
 			}
 
@@ -235,7 +235,7 @@ public class ItemDAO {
 			ResultSet rs = st.executeQuery();
 			ItemDataBeans item = new ItemDataBeans();
 
-			if (!rs.next()) {
+			if (rs.next()) {
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("name"));
 				item.setDetail(rs.getString("detail"));
@@ -243,7 +243,7 @@ public class ItemDAO {
 				item.setFileName(rs.getString("file_name"));
 				}
 
-			System.out.println("getAllItem completed");
+			System.out.println("getselectedItem completed");
 			return item;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

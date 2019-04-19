@@ -52,6 +52,7 @@ public class Filmdetail extends HttpServlet {
 			int userId = userInfo.getId();
 			int itemId = Integer.parseInt(request.getParameter("item_id"));
 
+
 			ItemDataBeans itemdetail = ItemDAO.selectItemDetailByitemId(itemId);
 
 			request.setAttribute("itemdetail", itemdetail);

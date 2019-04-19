@@ -80,7 +80,7 @@
 			<body class="bg-light">
 				<div class="container">
 					<div class="py-5 text-center">
-						<h2>購入履歴</h2>
+						<h2 id="history">購入履歴</h2>
 					</div>
 					<div class="row">
 						<c:forEach var="historyitem" items="${historyitemList}">

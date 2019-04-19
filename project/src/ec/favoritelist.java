@@ -66,7 +66,6 @@ public class favoritelist extends HttpServlet {
 		UserDataBeans userInfo = (UserDataBeans) session.getAttribute("userInfo");
 		String searchword = request.getParameter("search_word");
 
-
 		try {
 			int userId = userInfo.getId();
 			int itemId = Integer.parseInt(request.getParameter("item_id"));
@@ -76,9 +75,10 @@ public class favoritelist extends HttpServlet {
 			fdb.setItemid(itemId);
 
 			FavariteDAO.insertfavoriteItemByitemId(fdb);
-			response.sendRedirect("Serchresult?search_word="+searchword);
+			response.sendRedirect("Serchresult?search_word=" + searchword);
 
-
+//			ArrayList<ItemDataBeans> favoriteitem = ItemDAO.getfavoriteItem(userId);
+//			session.setAttribute("favoriteitem", favoriteitem);
 
 		} catch (Exception e) {
 			e.printStackTrace();

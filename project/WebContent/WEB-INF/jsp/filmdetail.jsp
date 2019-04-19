@@ -135,7 +135,13 @@
 					</div>
 				</div>
 
-				<a href="#" class="stretched-link">購入する</a>
+				<form action="Buy" method="POST">
+					<input type="hidden" name="item_id" value="${item.id}"> <input
+						type="hidden" name="search_word" value="${search_word}">
+
+					<button type="submit" class="btn btn-sm btn-outline-secondary"
+						name="action">購入する</button>
+				</form>
 			</div>
 		</div>
 	</div>

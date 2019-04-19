@@ -36,7 +36,7 @@
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
 										<form action="Buy" method="POST">
-											<input type="hidden" name="item_id" value="${item.id}">
+											<input type="hidden" name="item_id" value="${favoriteitem.id}">
 											<button type="submit"
 												class="btn btn-sm btn-outline-secondary">購入</button>
 										</form>
